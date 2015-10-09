@@ -2,15 +2,16 @@ var express = require('express');
 var router = express.Router();
 var Users = require('../users.js').Users;
 var users = new Users();
+var cors = require('cors');
 
 /* GET users listing. */
-router.get('/', function(req, res) {
+router.get('/', cors(), function(req, res) {
   users.fetchAllUsers(function(error, users) {
     res.send(users);
   });
 });
 
-router.get('/:id', function(req, res) {
+router.get('/:id', cors(), function(req, res) {
   users.fetchUserById(req.params.id, function(error, user) {
     if (user == null) {
       res.send(error, 404);
