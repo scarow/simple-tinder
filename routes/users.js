@@ -6,20 +6,12 @@ var cors = require('cors');
 
 /* GET users listing. */
 router.get('/', cors(), function(req, res) {
-  users.fetchAllUsers(function(error, users) {
+  var params = req.query;
+  users.fetchUserBatch(params, function(error, users) {
     res.send(users);
   });
 });
 
-router.get('/:id', cors(), function(req, res) {
-  users.fetchUserById(req.params.id, function(error, user) {
-    if (user == null) {
-      res.send(error, 404);
-    } else {
-      res.send(user);
-    }
-  });
-});
   // example for posting
   // router.post('/:id', function(req, res) {
   //   var _user = req.body;

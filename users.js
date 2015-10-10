@@ -1,20 +1,10 @@
 Users = function() {
   this.users = require('./usersSampleData');
-  this.fetchAllUsers = function(cb) {
-    cb(null, this.users);
+  this.fetchUserBatch = function(params, cb) {
+    var offset = parseInt(params.offset);
+    var limit = parseInt(params.limit);
+    cb(null, this.users.slice(offset, offset + limit));
   };
-  this.fetchUserById = function(id, cb) {
-    var foundUsers = this.users.filter(function(user) {return user.id == id});
-    if (foundUsers.length == 0) {
-      cb('User not found', null);
-    } else {
-      cb(null, foundUsers[0]);
-    }
-  };
-
-  // possible ideas:
-  // fetchUserByInterestedIn
-  // fetchUserByLocation
 
   // example for posting
   // this.updateUser = function(user, cb) {
